@@ -31,4 +31,9 @@ fn main() {
     let z = x + y as u8; // z is inferred to be u8, y is cast to u8
     let c = a + b; // c is inferred to be i64
     println!("z = {}, c = {}", z, c);
+
+    let mut convert_to_int = String::new();
+    io::stdin().read_line(&mut convert_to_int).expect("Failed to read line");
+    let int_from_string = convert_to_int.trim().parse::<i32>().expect("Failed to convert to int");
+    println!("You entered: {}", int_from_string);
 }
