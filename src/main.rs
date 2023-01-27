@@ -36,4 +36,25 @@ fn main() {
     io::stdin().read_line(&mut convert_to_int).expect("Failed to read line");
     let int_from_string = convert_to_int.trim().parse::<i32>().expect("Failed to convert to int");
     println!("You entered: {}", int_from_string);
+
+    let condition = 1 > 2;
+    println!("condition = {}", condition);
+
+    let item  = "banana";
+    if item == "banana" {
+        println!("I like bananas");
+    } else if item == "apple" {
+        println!("I like apples");
+    } else {
+        println!("I don't like {}", item);
+    }
+
+    first_function(3, 8); // call a function
+
+
+}
+
+fn first_function(x:i32, y:i32) -> i32 {
+    println!("The sum of x and y is {}", x + y);
+    x + y // return value as an expression, no semicolon.  Or use return keyword (return x + y;) as a statement
 }
