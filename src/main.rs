@@ -1,6 +1,6 @@
 use std::io;
 
-enum Direction {
+enum Direction { // enum is a custom type
     Up,
     Down,
     Left,
@@ -11,7 +11,7 @@ const MAX_NUMBER:u16 = 360;
 fn main() {
     let x: u8 = 6; // u8 means unsigned 32-bit integer, range 0 to 255
     let mut y: i8 = 7; // mut means mutable, i8 means signed 8-bit integer, range -128 to 127
-    println!("x = {}, y = {}", x, y);
+    println!("x = {}, y = {}", x, y); // ! means macro
     y = 8;
     println!("x = {}, y = {}", x, y);
 
@@ -23,8 +23,9 @@ fn main() {
     let nest_tup: (i32, f64, u8, (bool, char)) = (500, 6.4, 1, (false, 'a'));
     println!("nested tuple {}", nest_tup.3.1); // nested tuple access
     let arr: [i32; 5] = [1, 2, 3, 4, 5]; // array, fixed length, all elements must be same type
-    println!("arr = {} {}", arr[0], arr[4]); // {:?} is debug print
-
+    println!("arr = {} {}", arr[0], arr[4]);
+    let arr2 = [6,7,8,9,10];
+    println!("arr2 = {} {}", arr2[0], arr2[4]);
     println!("Enter some Input");
     let mut user_input = String::new();
     io::stdin()
@@ -71,6 +72,19 @@ fn main() {
     using_for();
     using_vector();
     using_enum();
+
+    let mut var_to_ref = 5;
+    let ref_to_var = &var_to_ref; // the & means reference, the variable is not copied, the reference is copied
+    let mut_ref_to_var = &mut var_to_ref; // the &mut means mutable reference
+    *mut_ref_to_var += 1; // the * means dereference, the value is changed
+
+    using_struct(200, 40, 150);
+
+    let square = Quadrangle {
+        width: 10,
+        height: 10,
+    };
+    square.print_description()
 }
 
 fn first_function(x: i32, y: i32) -> i32 {
@@ -128,12 +142,44 @@ fn using_vector() {
     println!("{}", cars[0]) // cars is still available after the for loop
 }
 
-fn using_enum() {
+fn using_enum() -> Direction {
     let direction = Direction::Up; // :: is the scope operator
     match direction {
         Direction::Up => println!("Going up"),
         Direction::Down => println!("Going down"),
         Direction::Left => println!("Going left"),
         Direction::Right => println!("Going right"),
+    }
+    direction
+}
+
+struct Colour{
+    red: u8,
+    green: u8,
+    blue: u8,
+}
+
+fn using_struct(red: u8, green: u8, blue: u8) {
+    let mut colour = Colour{red, green, blue};
+
+    println!("Red = {} Green = {} Blue = {}", colour.red, colour.green, colour.blue);
+}
+
+struct Quadrangle {
+    width: u32,
+    height: u32,
+}
+// impl is the implementation block this is where the methods are defined
+impl Quadrangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+
+    fn is_square(&self) -> bool {
+        self.width == self.height
+    }
+
+    fn print_description(&self) {
+        println!("Quadrangle {} x {} has area {}", self.width, self.height, self.area(), self.is_square());
     }
 }
