@@ -1,4 +1,10 @@
+mod functions;
+mod cli_args;
+mod define_traits;
+mod hash_maps; //mod is a keyword to declare a module.  modules are used to organize code into logical groups
+
 use std::io;
+
 
 enum Direction { // enum is a custom type
     Up,
@@ -26,7 +32,7 @@ fn main() {
     println!("arr = {} {}", arr[0], arr[4]);
     let arr2 = [6,7,8,9,10];
     println!("arr2 = {} {}", arr2[0], arr2[4]);
-    println!("Enter some Input");
+    println!("Enter some Input: ");
     let mut user_input = String::new();
     io::stdin()
         .read_line(&mut user_input)
@@ -82,9 +88,18 @@ fn main() {
 
     let square = Quadrangle {
         width: 10,
-        height: 10,
+        height: 50,
     };
-    square.print_description()
+    println!("{}", square.to_string());
+    functions::read_file();
+    functions::write_file();
+
+    match arr {
+        [1, 2, 3, 4, 5] => println!("arr is [1, 2, 3, 4, 5]"), //=> means match
+        [6, 7, 8, 9, 10] => println!("arr is [6, 7, 8, 9, 10]"),
+        _ => println!("arr is not [1, 2, 3, 4, 5] or [6, 7, 8, 9, 10]"),// _ means default or catch all
+    }
+
 }
 
 fn first_function(x: i32, y: i32) -> i32 {
@@ -179,7 +194,13 @@ impl Quadrangle {
         self.width == self.height
     }
 
-    fn print_description(&self) {
-        println!("Quadrangle {} x {} has area {}", self.width, self.height, self.area(), self.is_square());
+    // fn print_description(&self) {
+    //     println!("Quadrangle {} x {} has area {}", self.width, self.height, self.area(), self.is_square());
+    // }
+}
+
+impl ToString for Quadrangle {
+    fn to_string(&self) -> String {
+        format!("Quadrangle {} x {} has area {} is square {}", self.width, self.height, self.area(), self.is_square())
     }
 }
