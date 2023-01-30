@@ -1,7 +1,9 @@
 mod functions;
 mod cli_args;
 mod define_traits;
-mod hash_maps; //mod is a keyword to declare a module.  modules are used to organize code into logical groups
+mod hash_maps;
+mod randomness;
+mod regex_start; //mod is a keyword to declare a module.  modules are used to organize code into logical groups
 
 use std::io;
 
@@ -99,6 +101,21 @@ fn main() {
         [6, 7, 8, 9, 10] => println!("arr is [6, 7, 8, 9, 10]"),
         _ => println!("arr is not [1, 2, 3, 4, 5] or [6, 7, 8, 9, 10]"),// _ means default or catch all
     }
+
+    for i in 0..10 {
+        println!("{} generated {}", i, randomness::generate_random_number())
+    }
+
+    for i in 1..11{
+        if randomness::generate_random_bool() {
+            println!("Flip {} Heads", i);
+        } else {
+            println!("Flip {} Tails", i);
+        }
+    }
+
+
+
 
 }
 
