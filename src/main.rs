@@ -3,7 +3,8 @@ mod cli_args;
 mod define_traits;
 mod hash_maps;
 mod randomness;
-mod regex_start; //mod is a keyword to declare a module.  modules are used to organize code into logical groups
+mod regex_start;
+mod http_req; //mod is a keyword to declare a module.  modules are used to organize code into logical groups
 
 use std::io;
 
